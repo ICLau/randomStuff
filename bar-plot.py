@@ -32,7 +32,8 @@ y  = [tm(8,33), np.NaN,  tm(9,15),  np.NaN,     tm(8,55),  tm(9,33), tm(10,10), 
 y2 = [np.NaN,   np.NaN,  tm(17,15), tm(16,55),  tm(17,45), np.NaN,   tm(16,22), tm(18,1)]
 
 # find a better way to replace NaN from list object
-y = [labmda x: ]
+y  = list(map((lambda x: (tm(0,0) if x is np.nan or x!=x else x)), y))
+y2 = list(map((lambda x: (tm(0,0) if x is np.nan or x!=x else x)), y2))
 
 myDay = datetime.date (2017,1,1)
 yDt = [datetime.datetime.combine(myDay, t) for t in y]
