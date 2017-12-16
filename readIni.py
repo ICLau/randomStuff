@@ -8,69 +8,75 @@ Created on Wed Dec 13 22:54:40 2017
 ***   use: pip install configobj 
 ***   to acquire and install it
 """
-# =============================================================================
-# import numpy as np
-# 
-# ini = np.loadtxt('config.ini', 
-#                  dtype={'names':('key', 'value'),
-#                         'formats':('S100', 'S255')}, 
-#                  comments='!', 
-#                  delimiter='=',
-#                  converters = {0: lambda s: s.strip(),
-#                                1: lambda s: s.strip()})
-# 
-# ini2 = np.genfromtxt('config.ini', dtype=[('myKey','S100'),
-#                                           ('myValue', 'S255')], delimiter='=', comments='!' )
-# 
-# =============================================================================
-
-# the test config.ini is in the same folder
 
 from configobj import ConfigObj
 
-filename = 'config.ini'
-config = ConfigObj(filename)
+iniCached = False
+config = []
+iniFilename = 'config.ini'
 
-sInputSection = 'inputs'
-sUsersSection = 'Users'
-sCleansedDataSection = 'CleansedData'
-sBarSection = 'BarGraph'
+# =============================================================================
+def isCached ():
+    global iniCached
+    return iniCached
 
-InputSection = config[sInputSection]
-UsersSection = config[sUsersSection]
-CleansedDataSection = config[sCleansedDataSection]
-BarSection = config[sBarSection]
+# =============================================================================
+def readINI (filename = 'config.ini'):
+    if (isCached()): return
+
+    global config
+    config = ConfigObj(filename)
+    
+    global iniCached
+    iniCached = True
+    
+    global iniFilename
+    iniFilename = filename
+
+    print ('** Not cached, loaded INI file:', iniFilename)
+
+    
+# =============================================================================
+def get_sectionNames():
+    if (~isCached()):
+        readINI (iniFilename)  # need to somehow capture the ini filename somewhere
+
+    return True, config.sections
+
+# =============================================================================
+def get_sectionKeys(sName):
+    if (~isCached()):
+        readINI (iniFilename)
+    
+    sKeys = None
+    if (sName not in config.sections): return False, None
+    
+    sSection = config[sName]
+    sKeys = [k for k in sSection]
+
+    return True, sKeys
+
+# =============================================================================
+def get_sectionKeyValues (sName, kName):
+    bSuccess, sKeys = get_sectionKeys (sName)
+
+    if (~bSuccess): return False, None
+    
+    if (kName not in sKeys): return False, None
+    
+    return True, config[sName][kName]
+
+# =============================================================================
+# =============================================================================
+# =============================================================================
+# =============================================================================
+# =============================================================================
 
 
-# for removeusers, detect if the 1st and/or last character is '*'.
-# if so, remove them and conduct a substring search on user
-# if no '*' detected (1st and last char), then do an exact match 
-
-user1 = 'Gerald Lee'
-user2 = 'abc Gerald Lee'
-user3 = 'Gerald Lee abc'
-user4 = 'abc Gerald Lee def'
-
-user5 = 'Epic'
-user6 = 'aEpic'
-user7 = 'epicB'
-user8 = 'Epik'
-
-print ('config.keys:')
-for s in config.sections:
-    sName = s
-    print (sName)
-
-sectionKeys = config.sections
-
-print ('is', sUsersSection, 'in', sectionKeys, ':', (sUsersSection in sectionKeys))
-print ('is abc in', sectionKeys, ':', ('abc' in sectionKeys))
-print ('is users in', sectionKeys, ':', ('users' in sectionKeys))
-
-print ('*'*10)
-for s in UsersSection:
-    print ('UserSection key name =', s)
-    sValue = UsersSection[s]
-    print ('   value =', sValue)
+readINI()
+bool_Success, SectionNameList = get_sectionNames ()
+print ('get_sectionNames() returns', bool_Success)
+if (bool_Success): 
+    print ('* sectionNames are:', SectionNameList)
 
 
