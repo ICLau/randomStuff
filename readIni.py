@@ -9,23 +9,29 @@ Created on Wed Dec 13 22:54:40 2017
 ***   to acquire and install it
 """
 
+import glob
 from configobj import ConfigObj
 
 iniCached = False
-config = []
+config = None
 iniFilename = 'config.ini'
 
 # =============================================================================
 def isCached ():
-    global iniCached
     return iniCached
 
 # =============================================================================
 def readINI (filename = 'config.ini'):
-    if (isCached()): return
+    if (isCached()): return True
+
+    localpath = './' + filename
+    bFileExist = len(glob.glob (localpath))
+    if (bFileExist == 0):
+        print ('**', localpath, 'does not exist.')
+        return False
 
     global config
-    config = ConfigObj(filename)
+    config = ConfigObj(localpath)
     
     global iniCached
     iniCached = True
@@ -34,18 +40,18 @@ def readINI (filename = 'config.ini'):
     iniFilename = filename
 
     print ('** Not cached, loaded INI file:', iniFilename)
-
+    return True
     
 # =============================================================================
 def get_sectionNames():
-    if (~isCached()):
-        readINI (iniFilename)  # need to somehow capture the ini filename somewhere
+    if (False == isCached()):
+        if (False == readINI (iniFilename)): return False, None
 
     return True, config.sections
 
 # =============================================================================
 def get_sectionKeys(sName):
-    if (~isCached()):
+    if (False == isCached()):
         readINI (iniFilename)
     
     sKeys = None
@@ -60,23 +66,27 @@ def get_sectionKeys(sName):
 def get_sectionKeyValues (sName, kName):
     bSuccess, sKeys = get_sectionKeys (sName)
 
-    if (~bSuccess): return False, None
+    if (False == bSuccess): return False, None
     
     if (kName not in sKeys): return False, None
     
     return True, config[sName][kName]
 
 # =============================================================================
-# =============================================================================
-# =============================================================================
-# =============================================================================
-# =============================================================================
 
 
-readINI()
-bool_Success, SectionNameList = get_sectionNames ()
-print ('get_sectionNames() returns', bool_Success)
-if (bool_Success): 
+bSuccess = readINI()
+print ('readINI() returns:', bSuccess)
+bSuccess, SectionNameList = get_sectionNames ()
+print ('get_sectionNames() returns', bSuccess)
+if (bSuccess): 
     print ('* sectionNames are:', SectionNameList)
 
+bSuccess, kValues = get_sectionKeyValues ('input', 'delimitor')
+print ("get_sectionKeyValues ('input', 'delimitor'): returns:", bSuccess)
 
+bSuccess, kValues = get_sectionKeyValues ('inputs', 'delimiter')
+print ("get_sectionKeyValues ('inputs', 'delimiter'): returns:", bSuccess)
+
+bSuccess, kValues = get_sectionKeyValues ('inputs', 'inputFilePattern')
+print ("get_sectionKeyValues ('inputs', 'inputFilePattern'): returns:", bSuccess)
