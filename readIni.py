@@ -87,6 +87,9 @@ print ("get_sectionKeyValues ('input', 'delimitor'): returns:", bSuccess)
 
 bSuccess, kValues = get_sectionKeyValues ('inputs', 'delimiter')
 print ("get_sectionKeyValues ('inputs', 'delimiter'): returns:", bSuccess)
+print ('=> kValues:', kValues)
 
 bSuccess, kValues = get_sectionKeyValues ('inputs', 'inputFilePattern')
 print ("get_sectionKeyValues ('inputs', 'inputFilePattern'): returns:", bSuccess)
+print ('=> kValues:', kValues)
+
