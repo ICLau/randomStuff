@@ -1,0 +1,22 @@
+2017-12-18 10:21:30,467 default date/time format in log-warning message
+2017-12-18 10:21:30,467 with custom date/time format in the logging message.
+2017-12-18 10:21:30,467 info message
+2017-12-18 10:21:30,467 debug message
+2017-12-18 10:21:40,950 default date/time format in log-warning message
+2017-12-18 10:21:40,950 with custom date/time format in the logging message.
+2017-12-18 10:21:40,950 info message
+2017-12-18 10:21:40,950 debug message
+2017-12-18 10:21:55,144 default date/time format in log-warning message
+2017-12-18 10:21:55,144 with custom date/time format in the logging message.
+2017-12-18 10:21:55,144 info message
+2017-12-18 10:21:55,144 debug message
+2017-12-18 10:22:54,835 default date/time format in log-warning message
+2017-12-18 10:22:54,835 with custom date/time format in the logging message.
+2017-12-18 10:22:54,835 info message
+2017-12-18 10:22:54,835 debug message
+2017-12-18 10:22:54,835 model name __main__
+2017-12-18 15:00:19,066 default date/time format in log-warning message
+2017-12-18 15:00:19,066 with custom date/time format in the logging message.
+2017-12-18 15:00:19,066 info message
+2017-12-18 15:00:19,066 debug message
+2017-12-18 15:00:19,066 model name __main__

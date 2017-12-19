@@ -1,0 +1,13 @@
+2017-12-18 16:15:21,147 [testLogging]: warning message
+2017-12-18 16:15:21,148 [__main__]: a warning message
+2017-12-18 16:15:21,149 [__main__]: an info message
+2017-12-18 16:15:21,149 [__main__]: a critical message
+2017-12-18 16:27:12,881 [testLogging]: warning message
+2017-12-18 16:27:12,882 [__main__]: a warning message
+2017-12-18 16:27:12,882 [__main__]: an info message
+2017-12-18 16:27:12,882 [__main__]: a critical message
+2017-12-18 16:43:15,171 [testLogging]: warning message
+2017-12-18 16:43:15,171 [__main__]: a warning message
+2017-12-18 16:43:15,171 [__main__]: an info message
+2017-12-18 16:43:15,172 [__main__]: a debug message
+2017-12-18 16:43:15,172 [__main__]: a critical message
