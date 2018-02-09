@@ -79,3 +79,19 @@ dfMerged2.fillna(-222, inplace=True)
 # Test reference implications when doing assignment...
 df3.iloc[2,0] = 'nobody zzz...'     # this works
 df3.loc[3,('myValue')] = 100        # this seems to work too
+
+
+# test dataframe.replace() functionality
+oldnames = ['amy', 'emily']
+newnames = ['Amy','Peter']
+df4 = df3.copy()
+df4['myKey'].replace(oldnames, newnames, inplace=True)
+
+series3 = df3['myKey'].copy()
+oldnames_nocase = list(map(lambda lcase: lcase.lower(), oldnames))
+series3_nocase = list(map(lambda lcase: lcase.lower(), series3))
+
+
+
+
+
