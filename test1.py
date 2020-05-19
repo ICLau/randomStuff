@@ -95,14 +95,14 @@ else:
   print ('tup2 is < tup3')
 '''
 
-'''
 ###
 ### composite key for dict
 ###
+directory = {}
+
 first = "Robert"
 last = "Gayle"
 number = "123-4567"
-directory = {}
 directory[last, first] = number
 print (directory)
 
@@ -118,58 +118,75 @@ number = '333-3333'
 directory[last, first] = number
 print (directory)
 
-print (directory['Adam', 'Peter'])
+print (f'Directory["Adam", "Peter"] = {directory["Adam", "Peter"]}')
 
-b = list (directory.items())
-print (b)
+print(f'\nDirectory items():')
+print(*directory.items())
 
-b = list(directory.keys())
-print (b)
-for item in b:
-  print (f'Lastname: {item[0]}, Firstname: {item[1]}')
-'''
+print(f'\nDirecotrory keys():')
+print(*directory.keys())
+
+print(f'\nDirectory values():')
+print( *directory.values())
+
+print(f'\nIterate Directory items, access each item via array indexing:')
+for item in directory:
+  print (f'Lastname: {item[0]}, Firstname: {item[1]} - Phone: {directory[item]}')
+
 
 ###
 ### namedtuple
 ###
-from collections import namedtuple
-Features = namedtuple('myFeatures', ['age', 'gender', 'name'])
-print (Features)
-row = Features(age=22, gender='male', name='Alex')
-row = Features(age=18, gender='female', name='Betty')
-row = Features(age=55, gender='male', name='Charles')
-print (f'\nFeatures:', Features)
-print(row.age)
+# from collections import namedtuple
+# Features = namedtuple('myFeatures', ['age', 'gender', 'name'])
+# print (Features)
+# row = Features(age=22, gender='male', name='Alex')
+# row = Features(age=18, gender='female', name='Betty')
+# row = Features(age=55, gender='male', name='Charles')
+# print (f'\nFeatures:', Features)
+# print(row.age)
 
-###
-EmployeeRecord = namedtuple('EmployeeRecord', 'name, age, title, department, paygrade')
+# ###
+# EmployeeRecord = namedtuple('EmployeeRecord', 'name, age, title, department, paygrade')
 
-import csv
-for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "r"))):
-    print(emp.name, emp.title, emp.age, emp.paygrade)
+# import csv
+# for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "r"))):
+#     print(emp.name, emp.title, emp.age, emp.paygrade)
 
-### Below is the same as the above [very compacted] code
-###
-csvFile = open ('employees.csv', 'rt')
-dataReaderIter = csv.reader(csvFile)
-print (2*'\n')
-# for line in dataReaderIter:
-#     print (line)
-myMappedData = map(EmployeeRecord._make, dataReaderIter)
-for item in myMappedData:
-    print (item)
-    print (item.name, item.age, item.title, item.department, item.paygrade)
+# ### Below is the same as the above [very compacted] code
+# ###
+# csvFile = open ('employees.csv', 'rt')
+# dataReaderIter = csv.reader(csvFile)
+# print (2*'\n')
+# # for line in dataReaderIter:
+# #     print (line)
+# myMappedData = map(EmployeeRecord._make, dataReaderIter)
+# for item in myMappedData:
+#     print (item)
+#     print (item.name, item.age, item.title, item.department, item.paygrade)
 
-csvFile.close()
+# csvFile.close()
 
-###
-### collections.Counter
-###
-from collections import Counter
-ages = [22, 22, 25, 25, 30, 24, 26, 24, 35, 45, 52, 22, 22, 22, 25, 16, 11, 15, 40, 30]
-value_counts = Counter(ages)
-print(value_counts.most_common(4))  # the most 4 common (highest count) elements
-print(value_counts.most_common())   # all elements sorted by count
-n = 4   # the nth's least common elements
-print(value_counts.most_common()[:-n-1:-1])
-print(value_counts.most_common()[-1::-1])   # returns the reversed of most_common()
+# ###
+# ### collections.Counter
+# ###
+# from collections import Counter
+# ages = [22, 22, 25, 25, 30, 24, 26, 24, 35, 45, 52, 22, 22, 22, 25, 16, 11, 15, 40, 30]
+# value_counts = Counter(ages)
+# print(value_counts.most_common(4))  # the most 4 common (highest count) elements
+# print(value_counts.most_common())   # all elements sorted by count
+# n = 4   # the nth's least common elements
+# print(value_counts.most_common()[:-n-1:-1])
+# print(value_counts.most_common()[-1::-1])   # returns the reversed of most_common()
+
+vMixed = [None, 1,2, None, None]
+sMixed = set(vMixed)
+
+vNone = [None,None,None,None,None,None]
+sNone = set(vNone)
+
+print(f'vMixed set: {sMixed}')
+print(f'vNone set: + {sNone}')
+
+print (f'len(vNone) = {len(sNone)}')
+print (f'Does vNone contains all None: {None in sNone}')

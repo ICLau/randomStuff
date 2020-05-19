@@ -1,0 +1,5 @@
+LastName, FirstName, email, Salary
+Doe, John, j-doe@gmail.com, 100500.00
+Chatson, Mary, m-chatson@gmail.com, 100200.00
+Gates, Bill, b-gates@gmail.com, 5.00
+Brothers, Warner, w-brothers@gmail.com, 2000000.00
